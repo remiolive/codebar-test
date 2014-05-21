@@ -37,13 +37,41 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
+/*        $('#scan-btn').click(function() {
+            alert('jquery click');
+        });*/
+        document.getElementById('scan-btn').addEventListener('click', function () {
+            cordova.plugins.barcodeScanner.scan(
+              function (result) {
+                  alert("We got a barcode\n" +
+                        "Result: " + result.text + "\n" +
+                        "Format: " + result.format + "\n" +
+                        "Cancelled: " + result.cancelled);
+              }, 
+              function (error) {
+                  alert("Scanning failed: " + error);
+              }
+            );
+        }, false);
+      /*  var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
 
-        console.log('Received Event: ' + id);
+        
+        console.log('Received Event: ' + id);*/
+  /*      cordova.plugins.barcodeScanner.scan(
+          function (result) {
+              alert("We got a barcode\n" +
+                    "Result: " + result.text + "\n" +
+                    "Format: " + result.format + "\n" +
+                    "Cancelled: " + result.cancelled);
+          }, 
+          function (error) {
+              alert("Scanning failed: " + error);
+          }
+       );*/
     }
 };
